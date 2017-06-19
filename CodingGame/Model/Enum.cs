@@ -1,6 +1,6 @@
 ﻿namespace CodingGame.Model
 {
-    public class Enum
+    public partial class Enum
     {
         public enum GameStatus
         {

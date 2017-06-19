@@ -5,21 +5,21 @@ namespace CodingGame.Model
     public class Game
     {
         /** Token of the game */
-        public string token { get; set; }
+        public string Token { get; set; }
 
         /** Is the game started? */
-        public GameStatus status { get; set; }
+        public GameStatus Status { get; set; }
 
         /** Speed of the game (number of milliseconds in a time unit) */
-        public int speed { get; set; }
+        public int Speed { get; set; }
 
         /** If status is {@link GameStatus#PLAYING}, indicates the time (in ms) until the game starts */
-        public long countDown { get; set; }
+        public long CountDown { get; set; }
 
         /** Data of the current player */
-        public Player me { get; set; }
+        public Player Me { get; set; }
 
         /**>Data of the foe of the current player */
-        public Player foe { get; set; }
+        public Player Foe { get; set; }
     }
 }

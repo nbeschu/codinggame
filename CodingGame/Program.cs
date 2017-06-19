@@ -9,10 +9,10 @@ namespace CodingGame
         {
 
             Game game = new Game();
-            game.token = "toto";
-            var token = game.token;
+            game.Token = "toto";
+            var token = game.Token;
 
-            Console.WriteLine(string.Format("token = {0} et game.token = {1}", token, game.token));
+            Console.WriteLine(string.Format("token = {0} et game.token = {1}", token, game.Token));
             Console.ReadLine();
         }
     }
