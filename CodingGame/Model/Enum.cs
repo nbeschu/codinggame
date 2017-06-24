@@ -2,6 +2,9 @@
 {
     public partial class Enum
     {
+        /// <summary>
+        /// The different game status
+        /// </summary>
         public enum GameStatus
         {
             None = 0,
@@ -10,6 +13,9 @@
             FINISHED = 3
         }
 
+        /// <summary>
+        /// The different character classes
+        /// </summary>
         public enum Character
         {
             None = 0,

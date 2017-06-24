@@ -2,13 +2,19 @@
 {
     public class Action
     {
-        /** Name of the action (to be used by the players to play) */
+        /// <summary>
+        /// Name of the action (to be used by the players to play)
+        /// </summary>
         public string Name { get; set; }
 
-        /** Description of the action (to be read by players to understand the action: players can't see real effects) */
+        /// <summary>
+        /// Description of the action (to be read by players to understand the action: players can't see real effects)
+        /// </summary>
         public string Description { get; set; }
 
-        /** Time before the player can't play again after this action (in time units, can't be null) */
-        public double CoolDown { get; set; }
+        /// <summary>
+        /// Time before the player can't play again after this action (in time units, can't be null)
+        /// </summary>
+        public int CoolDown { get; set; }
     }
 }

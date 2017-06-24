@@ -14,7 +14,7 @@ namespace CodingGame.Model
         public int Speed { get; set; }
 
         /** If status is {@link GameStatus#PLAYING}, indicates the time (in ms) until the game starts */
-        public long CountDown { get; set; }
+        public int CountDown { get; set; }
 
         /** Data of the current player */
         public Player Me { get; set; }

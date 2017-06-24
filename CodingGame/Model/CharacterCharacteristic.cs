@@ -4,13 +4,19 @@ namespace CodingGame.Model
 {
     public class CharacterCharacteristic
     {
-        /** Armor of the character. All characters start with the same amount of heal points, but they have different armors. */
+        /// <summary>
+        /// Armor of the character. All characters start with the same amount of heal points, but they have different armors.
+        /// </summary>
         public long Armor { get; set; }
 
-        /** Name of the character */
+        /// <summary>
+        /// Name of the character
+        /// </summary>
         public string Name { get; set; }
 
-        /** List of the available actions for this character */
+        /// <summary>
+        /// List of the available actions for this character
+        /// </summary>
         public List<Action> Actions { get; set; }
     }
 }

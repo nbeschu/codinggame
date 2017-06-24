@@ -2,13 +2,19 @@
 {
     public class Player
     {
-        /** Heal points remaining */
+        /// <summary>
+        /// Heal points remaining
+        /// </summary>
         public long HealthPoints { get; set; }
 
-        /** Armor remaining */
+        /// <summary>
+        /// Armor remaining
+        /// </summary>
         public long Armor { get; set; }
 
-        /** Character chosen by the player */
+        /// <summary>
+        /// Character chosen by the player
+        /// </summary>
         public CharacterCharacteristic Character { get; set; }
     }
 }
