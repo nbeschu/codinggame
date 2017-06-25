@@ -61,17 +61,68 @@ namespace CodingGame
                 Console.WriteLine("Waiting countdown during " + game.CountDown + "ms...");
                 Thread.Sleep(game.CountDown);
 
-                /*
-                 * IA code
-                 */
+                // AI playing the game
+                game = PlayGame(game);
+
+                // game result
+                if (game.Me.HealthPoints > 0)
+                {
+                    Console.WriteLine("You WIN ! :)");
+                }
+                else
+                {
+                    Console.WriteLine("You lose... :(");
+                }
 
             }
             catch (Exception e)
             {
                 Console.WriteLine("Something goes wrong...");
                 Console.WriteLine(e.Message);
-                QuitApplication();
             }
+
+            QuitApplication();
+        }
+
+        /// <summary>
+        /// Game played by our AI
+        /// </summary>
+        private static Game PlayGame(Game game)
+        {
+            // ******************************************
+            // IMPLEMENT YOUR AI HERE
+            // ******************************************
+
+            // The following AI just randomly alternate with the 4 possible actions
+
+            Random random = new Random();
+
+            while (game.Status != GameStatus.FINISHED)
+            {
+
+                switch (random.Next(0, 4))
+                {
+                    case 0:
+                        GameBusiness.playAndWaitCoolDown(game.Token, playerKey, "HIT");
+                        break;
+                    case 1:
+                        GameBusiness.playAndWaitCoolDown(game.Token, playerKey, "THRUST");
+                        break;
+                    case 2:
+                        GameBusiness.playAndWaitCoolDown(game.Token, playerKey, "HEAL");
+                        break;
+                    case 3:
+                        GameBusiness.playAndWaitCoolDown(game.Token, playerKey, "SHIELD");
+                        Console.WriteLine("Waiting for shield duration... (" + (long)game.Speed / 2 + "ms)");
+                        Thread.Sleep(game.Speed / 2);
+                        break;
+                }
+
+                game = GameBusiness.GetGame(game.Token, playerKey);
+                Console.WriteLine("Me: " + game.Me.HealthPoints + "pv, foe: " + game.Foe.HealthPoints + "pv.");
+            }
+
+            return game;
         }
 
         /// <summary>
