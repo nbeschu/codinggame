@@ -28,6 +28,8 @@ namespace CodingGame.Business
         private static string JOIN_GET_GAME_URL = "/fights/{0}/players/{1}";
         private static string PLAY_GAME_URL = "/fights/{0}/players/{1}/actions/{2}";
 
+        #region public methods
+
         /// <summary>
         /// create a new game
         /// </summary>
@@ -120,13 +122,17 @@ namespace CodingGame.Business
         /// <param name="playerKey">The player id</param>
         /// <param name="actionName">The action to perform in the game</param>
         /// <returns>The current game state</returns>
-        public static Game playAndWaitCoolDown(string gameToken, string playerKey, string actionName)
+        public static Game PlayAndWaitCoolDown(string gameToken, string playerKey, string actionName)
         {
             Game game = Play(gameToken, playerKey, actionName);
             WaitCoolDown(game, actionName);
 
             return game;
         }
+
+        #endregion
+
+        #region private methods
 
         /// <summary>
         /// Get and log the server response 
@@ -174,5 +180,7 @@ namespace CodingGame.Business
                 }
             }
         }
+
+        #endregion
     }
 }

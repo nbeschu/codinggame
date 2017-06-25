@@ -21,6 +21,8 @@ namespace CodingGame
 
         private static string playerKey = "nbe";
 
+        #region main
+
         /// <summary>
         /// Launch the game
         /// </summary>
@@ -84,6 +86,10 @@ namespace CodingGame
             QuitApplication();
         }
 
+        #endregion
+
+        #region private methods
+
         /// <summary>
         /// Game played by our AI
         /// </summary>
@@ -103,16 +109,16 @@ namespace CodingGame
                 switch (random.Next(0, 4))
                 {
                     case 0:
-                        GameBusiness.playAndWaitCoolDown(game.Token, playerKey, "HIT");
+                        GameBusiness.PlayAndWaitCoolDown(game.Token, playerKey, "HIT");
                         break;
                     case 1:
-                        GameBusiness.playAndWaitCoolDown(game.Token, playerKey, "THRUST");
+                        GameBusiness.PlayAndWaitCoolDown(game.Token, playerKey, "THRUST");
                         break;
                     case 2:
-                        GameBusiness.playAndWaitCoolDown(game.Token, playerKey, "HEAL");
+                        GameBusiness.PlayAndWaitCoolDown(game.Token, playerKey, "HEAL");
                         break;
                     case 3:
-                        GameBusiness.playAndWaitCoolDown(game.Token, playerKey, "SHIELD");
+                        GameBusiness.PlayAndWaitCoolDown(game.Token, playerKey, "SHIELD");
                         Console.WriteLine("Waiting for shield duration... (" + (long)game.Speed / 2 + "ms)");
                         Thread.Sleep(game.Speed / 2);
                         break;
@@ -211,5 +217,7 @@ namespace CodingGame
             Console.ReadKey();
             Environment.Exit(0);
         }
+
+        #endregion
     }
 }
