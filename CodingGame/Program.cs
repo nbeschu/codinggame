@@ -21,6 +21,10 @@ namespace CodingGame
 
         private static string playerKey = "nbe";
 
+        /// <summary>
+        /// Launch the game
+        /// </summary>
+        /// <param name="args">the arguments to create/join a game</param>
         public static void Main(string[] args)
         {
             // Check the program arguments
@@ -66,7 +70,7 @@ namespace CodingGame
             {
                 Console.WriteLine("Something goes wrong...");
                 Console.WriteLine(e.Message);
-                Environment.Exit(0);
+                QuitApplication();
             }
         }
 
@@ -140,8 +144,20 @@ namespace CodingGame
         private static void ShowErrorAndQuit(string errorMessage)
         {
             Console.WriteLine(errorMessage);
-            Console.WriteLine("In CREATE mode : CodingGame.exe <mode> <gameName> <characterClass> <characterName> <versusPlayer>");
-            Console.WriteLine("In JOIN mode : CodingGame.exe <mode> <gameToken> <characterClass> <characterName> <versusPlayer>");
+            Console.WriteLine("How to use in CREATE mode : CodingGame.exe <mode> <gameName> <characterClass> <characterName> <versusPlayer>");
+            Console.WriteLine("How to use in JOIN mode : CodingGame.exe <mode> <gameToken> <characterClass> <characterName> <versusPlayer>");
+
+            QuitApplication();
+        }
+
+        /// <summary>
+        /// Quit the application console
+        /// </summary>
+        private static void QuitApplication()
+        {
+            Console.WriteLine();
+            Console.Write("Press any key to quit...");
+            Console.ReadKey();
             Environment.Exit(0);
         }
     }
