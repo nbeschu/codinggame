@@ -1,6 +1,4 @@
-﻿using static CodingGame.Model.Enum;
-
-namespace CodingGame.Model
+﻿namespace CodingGame.Model
 {
     public class Game
     {
