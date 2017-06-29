@@ -21,6 +21,18 @@ namespace CodingGame
 
         private static string playerKey = "nbe";
 
+        /// <summary>
+        /// The next action to do
+        /// </summary>
+        /// <remarks>1st action of the game is HIT</remarks>
+        public static string nextAction = "HIT";
+
+        /// <summary>
+        /// The last action I have done
+        /// </summary>
+        public static string lastAction;
+
+
         #region main
 
         /// <summary>
@@ -44,6 +56,7 @@ namespace CodingGame
                     gameToken = game.Token;
                 }
                 // Then join the game
+                Console.WriteLine();
                 Console.WriteLine("Joining the game...");
                 game = GameBusiness.JoinGame(gameToken, playerKey, character.ToString(), playerName);
 
@@ -61,19 +74,24 @@ namespace CodingGame
                 // Opponent is connected. Waiting the countdown
                 game = GameBusiness.GetGame(game.Token, playerKey);
                 Console.WriteLine("Waiting countdown during " + game.CountDown + "ms...");
-                Thread.Sleep(game.CountDown);
+                Thread.Sleep((int)game.CountDown);
+
+                Console.WriteLine();
+                Console.WriteLine("Fight !");
+                Console.WriteLine();
 
                 // AI playing the game
                 game = PlayGame(game);
 
+                Console.WriteLine();
                 // game result
                 if (game.Me.HealthPoints > 0)
                 {
-                    Console.WriteLine("You WIN ! :)");
+                    Console.WriteLine("You WIN ! :D");
                 }
                 else
                 {
-                    Console.WriteLine("You lose... :(");
+                    Console.WriteLine("You lose... :'(");
                 }
 
             }
@@ -95,40 +113,36 @@ namespace CodingGame
         /// </summary>
         private static Game PlayGame(Game game)
         {
-            // ******************************************
-            // IMPLEMENT YOUR AI HERE
-            // ******************************************
-
-            // The following AI just randomly alternate with the 4 possible actions
-
-            Random random = new Random();
+            //Create a callback to get the current game state each 100ms
+            Timer timer = new Timer(WatchGame, playerKey, TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100));
 
             while (game.Status != GameStatus.FINISHED)
             {
-
-                switch (random.Next(0, 4))
-                {
-                    case 0:
-                        GameBusiness.PlayAndWaitCoolDown(game.Token, playerKey, "HIT");
-                        break;
-                    case 1:
-                        GameBusiness.PlayAndWaitCoolDown(game.Token, playerKey, "THRUST");
-                        break;
-                    case 2:
-                        GameBusiness.PlayAndWaitCoolDown(game.Token, playerKey, "HEAL");
-                        break;
-                    case 3:
-                        GameBusiness.PlayAndWaitCoolDown(game.Token, playerKey, "SHIELD");
-                        Console.WriteLine("Waiting for shield duration... (" + (long)game.Speed / 2 + "ms)");
-                        Thread.Sleep(game.Speed / 2);
-                        break;
-                }
+                lastAction = GameBusiness.PlayAndWaitCoolDown(game.Token, playerKey, nextAction);
 
                 game = GameBusiness.GetGame(game.Token, playerKey);
                 Console.WriteLine("Me: " + game.Me.HealthPoints + "pv, foe: " + game.Foe.HealthPoints + "pv.");
             }
 
+            timer.Dispose();
+
             return game;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="playerKey"></param>
+        /// <param name="nextAction"></param>
+        private static void WatchGame(object playerKey)
+        {
+            var key = playerKey.ToString();
+
+            var game = GameBusiness.GetGame(gameToken, key);
+            Console.WriteLine("Me: " + game.Me.HealthPoints + "pv, foe: " + game.Foe.HealthPoints + "pv.");
+
+            nextAction = AiBusiness.GetNextAction(game, lastAction);
         }
 
         /// <summary>
@@ -177,8 +191,8 @@ namespace CodingGame
             {
                 ShowErrorAndQuit("3rd argument is required, and must be your character type");
             }
-            character = (Character)Enum.Parse(typeof(Character), args[2]);
-            if (character == Character.None)
+
+            if (!Enum.TryParse(args[2], out character) || !Enum.IsDefined(typeof(Character), character))
             {
                 var values = Enum.GetNames(typeof(Character));
                 ShowErrorAndQuit("3rd argument must be " + string.Join(" or ", values));

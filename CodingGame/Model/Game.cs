@@ -1,23 +1,37 @@
-﻿namespace CodingGame.Model
+﻿using System.Collections.Generic;
+
+namespace CodingGame.Model
 {
     public class Game
     {
-        /** Token of the game */
+        /// <summary>
+        /// Token of the game
+        /// </summary>
         public string Token { get; set; }
 
-        /** Is the game started? */
+        /// <summary>
+        /// Is the game started ?
+        /// </summary>
         public GameStatus Status { get; set; }
 
-        /** Speed of the game (number of milliseconds in a time unit) */
+        /// <summary>
+        /// Speed of the game (number of milliseconds in a time unit)
+        /// </summary>
         public int Speed { get; set; }
 
-        /** If status is {@link GameStatus#PLAYING}, indicates the time (in ms) until the game starts */
-        public int CountDown { get; set; }
+        /// <summary>
+        /// If status is {@link GameStatus#PLAYING}, indicates the time (in ms) until the game starts
+        /// </summary>
+        public int? CountDown { get; set; }
 
-        /** Data of the current player */
+        /// <summary>
+        ///  Data of the current player
+        /// </summary>
         public Player Me { get; set; }
 
-        /**>Data of the foe of the current player */
+        /// <summary>
+        /// Data of the foe of the current player
+        /// </summary>
         public Player Foe { get; set; }
     }
 }

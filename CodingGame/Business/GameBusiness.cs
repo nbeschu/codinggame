@@ -22,7 +22,7 @@ namespace CodingGame.Business
         public static RestClient client = new RestClient(API_URL); 
 
         // change this bool to show json response in console
-        private static bool ENABLE_JSON_LOG = false;
+        private static bool ENABLE_JSON_LOG = true;
 
         private static string CREATE_GAME_URL = "/fights";
         private static string JOIN_GET_GAME_URL = "/fights/{0}/players/{1}";
@@ -121,13 +121,13 @@ namespace CodingGame.Business
         /// <param name="gameToken">The game token</param>
         /// <param name="playerKey">The player id</param>
         /// <param name="actionName">The action to perform in the game</param>
-        /// <returns>The current game state</returns>
-        public static Game PlayAndWaitCoolDown(string gameToken, string playerKey, string actionName)
+        /// <returns>The action that have been done</returns>
+        public static string PlayAndWaitCoolDown(string gameToken, string playerKey, string actionName)
         {
             Game game = Play(gameToken, playerKey, actionName);
             WaitCoolDown(game, actionName);
 
-            return game;
+            return actionName;
         }
 
         #endregion
@@ -142,14 +142,14 @@ namespace CodingGame.Business
         /// <returns></returns>
         private static Game ConvertAndLogResponse(IRestResponse response, string requestType)
         {
-            var result = JsonConvert.DeserializeObject<Game>(response.Content);
-            
             if (ENABLE_JSON_LOG)
             {
+                Console.WriteLine();
                 Console.WriteLine("Response from " + requestType + " game request :");
                 Console.WriteLine(response.Content);
             }
-            return result;
+
+            return JsonConvert.DeserializeObject<Game>(response.Content);
         }
 
         /// <summary>

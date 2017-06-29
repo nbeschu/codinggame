@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\AiBusiness.cs" />
     <Compile Include="Business\GameBusiness.cs" />
     <Compile Include="Model\Action.cs" />
+    <Compile Include="Model\ActionHistory.cs" />
     <Compile Include="Model\CharacterCharacteristic.cs" />
     <Compile Include="Model\Enum.cs" />
     <Compile Include="Model\Game.cs" />

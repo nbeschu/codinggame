@@ -1,5 +1,8 @@
 ﻿namespace CodingGame.Model
 {
+    /// <summary>
+    /// The Action in the history (only 10 actions are report in the history at a time)
+    /// </summary>
     public class Action
     {
         /// <summary>
@@ -15,6 +18,7 @@
         /// <summary>
         /// Time before the player can't play again after this action (in time units, can't be null)
         /// </summary>
-        public int CoolDown { get; set; }
+        public long CoolDown { get; set; }
+
     }
 }
